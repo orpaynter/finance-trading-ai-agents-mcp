@@ -1,0 +1,3 @@
+
+class TimeframeItemManager:
+    pass

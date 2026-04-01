@@ -1,0 +1,80 @@
+{
+  "name": "orpaynter-finance-mcp",
+  "description": "OrPaynter Financial Monitoring and Cash Flow Optimization MCP Server",
+  "version": "1.0.0",
+  "author": "OrPaynter Team",
+  "entrypoint": "./run.sh",
+  "protocol_version": "1.0",
+  "runtime": "python3",
+  "capabilities": {
+    "get_portfolio_health": {
+      "description": "Get comprehensive portfolio health analysis with risk scoring and diversification metrics",
+      "parameters": {
+        "symbols": "List of stock symbols to analyze",
+        "weights": "Portfolio allocation weights for each symbol"
+      }
+    },
+    "optimize_cash_flow": {
+      "description": "Optimize portfolio cash flow and intelligent rebalancing",
+      "parameters": {
+        "symbols": "List of available stock symbols",
+        "risk_tolerance": "Risk tolerance level (conservative, moderate, aggressive)"
+      }
+    },
+    "validate_configuration": {
+      "description": "Server health checks and capability validation",
+      "parameters": {}
+    }
+  },
+  "tools": [
+    {
+      "name": "get_portfolio_health",
+      "description": "Analyze portfolio health and risk metrics",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "symbols": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Stock symbols to analyze"
+          },
+          "weights": {
+            "type": "object",
+            "additionalProperties": {"type": "number"},
+            "description": "Portfolio allocation weights"
+          }
+        },
+        "required": ["symbols", "weights"]
+      }
+    },
+    {
+      "name": "optimize_cash_flow",
+      "description": "Optimize portfolio allocation for cash flow",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "symbols": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Available stock symbols"
+          },
+          "risk_tolerance": {
+            "type": "string",
+            "enum": ["conservative", "moderate", "aggressive"],
+            "default": "moderate"
+          }
+        },
+        "required": ["symbols"]
+      }
+    },
+    {
+      "name": "validate_configuration",
+      "description": "Validate server configuration and health",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  ]
+}
